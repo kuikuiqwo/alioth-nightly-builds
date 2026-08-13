@@ -31,7 +31,7 @@ jobs:
           echo -e '\n\n' | pmbootstrap init || true
           cd ~/.local/var/pmbootstrap/cache_git/pmaports
           git remote get-url github 2>/dev/null || \
-          git remote add github https://github.com/Ayushskull7/pmaports-alioth-new
+          git remote add github https://github.com/kuikuiqwo/pmaports-alioth-new
           git fetch github main
           git checkout github/main -- device-xiaomi-alioth/
           git checkout github/main -- firmware-xiaomi-alioth/
