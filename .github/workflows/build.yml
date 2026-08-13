@@ -59,7 +59,7 @@ jobs:
           make alioth_defconfig
 
           # ==== apply charge voltage limit ====
-          sed -i 's|voltage-max-design-microvolt = <4460000>|voltage-max-design-microvolt = <3800000>|' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
+          sed -i 's|voltage-max-design-microvolt = <4460000>|voltage-max-design-microvolt = <3700000>|' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
           grep "voltage-max-design" arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
           
           echo "===== VERIFYING CRITICAL KERNEL OPTIONS ====="
