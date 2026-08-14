@@ -61,6 +61,10 @@ jobs:
           # ==== apply charge voltage limit ====
           sed -i 's|voltage-max-design-microvolt = <4460000>|voltage-max-design-microvolt = <3700000>|' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
           grep "voltage-max-design" arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
+
+          # ==== disable SLPI remote processor ====
+          sed -i '/^&slpi {/,/^};/ s/status = "okay";/status = "disabled";/' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
+          grep -A3 '^&slpi' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
           
           echo "===== VERIFYING CRITICAL KERNEL OPTIONS ====="
           CONFIG=.output/.config
