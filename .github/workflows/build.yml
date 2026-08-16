@@ -58,6 +58,19 @@ jobs:
           source ../pmbootstrap/helpers/envkernel.sh
           make alioth_defconfig
 
+          # ==== enable Docker bridge support (raw table + compat) ====
+          ./scripts/config --file .output/.config --enable IP_NF_RAW
+          ./scripts/config --file .output/.config --enable NETFILTER_XTABLES_COMPAT
+          ./scripts/config --file .output/.config --enable VETH
+          ./scripts/config --file .output/.config --enable BRIDGE
+          echo "===== DOCKER CONFIG CHECK ====="
+          grep -E "CONFIG_IP_NF_RAW=y" .output/.config
+          grep -E "CONFIG_NETFILTER_XTABLES_COMPAT=y" .output/.config
+          grep -E "CONFIG_VETH=y" .output/.config
+          grep -E "CONFIG_BRIDGE=y" .output/.config
+          echo "===== DOCKER CONFIG DONE ====="
+
+
           # ==== apply charge voltage limit ====
           sed -i 's|voltage-max-design-microvolt = <4460000>|voltage-max-design-microvolt = <3700000>|' arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
           grep "voltage-max-design" arch/arm64/boot/dts/qcom/sm8250-xiaomi-alioth.dts
